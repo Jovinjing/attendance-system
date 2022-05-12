@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>签到打卡页面</title>
+    <div th:replace="common/common.html :: common_resource"></div>
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>签到打卡表格</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="signin_list.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- 3D立体按钮在button的class中加入 dim -->
+                <div class="ibox-content" style="margin-bottom:50px">
+                    <div class="row">
+                        <div class="col-sm-2 m-b-xs">
+                            <a data-toggle="modal" href="signin_list.html#modal-form"
+                               th:data-stuNo="${session.user.userId}"
+                               onclick="addForm(this.getAttribute('data-stuNo'))">
+                                <button style="width:130px" class="btn btn-outline btn-primary" type="button">
+                                    <i class="fa fa-plus"></i> 打卡
+                                </button>
+                            </a>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <input style="height:35px;" type="text" placeholder="请输入关键词" id="keywords"
+                                       class="input-sm form-control">
+                                <span class="input-group-btn">
+                                        <button style="height:35px;width:80px;" type="button"
+                                                class="btn btn-sm btn-primary"
+                                                href="javascript:;" onclick="query()"> 搜索</button>
+                                    </span>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            // 模糊查询
+                            function query() {
+                                window.location.href = "/zjh/signin/findSigninById?index=3&signinId=" + $("#keywords").val() + "";
+                            }
+                        </script>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr style="size:24px;height:60px">
+                                <th style="text-align:center;width:10%">打卡编号</th>
+                                <th style="text-align:center;width:10%;display: none">打卡类别</th>
+                                <th style="text-align:center;width:10%;display: none">打卡理由</th>
+                                <th style="text-align:center;width:7%;display: none">天数</th>
+                                <th style="text-align:center;width:10%">工号</th>
+                                <th style="text-align:center;width:10%">打卡时间</th>
+                                <th style="text-align:center;width:8%">状态</th>
+                                <th style="text-align:center;width:10%;display: none">审核时间</th>
+                                <th style="text-align:center;max-width:10%;display: none">审核意见</th>
+                                <th style="text-align:center;width:15%;display: none">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody style="text-align:center;size:20px;">
+                            <tr th:each="signin : ${signinList}">
+                                <td th:text="${signin.signinId}">打卡编号</td>
+                                <span style="display: none" th:each="course : ${session.courseList}">
+                                                                            <span th:if="${course.courseId eq signin.courseId}">
+                                                                                <td th:text="${course.courseName}">打卡类别</td>
+                                                                            </span>
+                                                                        </span>
+                                <td style="display: none" th:text="${signin.reason}">打卡理由</td>
+                                <td style="display: none" th:text="${signin.dayNum}">天数</td>
+                                <td th:text="${signin.stuNo}">工号</td>
+                                <td th:text="${signin.applyTime}">打卡时间</td>
+                                <span th:switch="${signin.status eq '成功'} or ${signin.status eq '拒批'}">
+                                                                            <span th:case="true">
+                                                                            <td th:if="${signin.status eq '成功'}"
+                                                                                style="color:limegreen"
+                                                                                th:text="${signin.status}">状态</td>
+                                                                            <td th:if="${signin.status eq '拒批'}"
+                                                                                style="color:orangered"
+                                                                                th:text="${signin.status}">状态</td>
+                                                                            </span>
+                                                                            <td th:case="false"
+                                                                                th:text="${signin.status}">状态</td>
+                                                                        </span>
+                                <td style="display: none" th:text="${signin.auditTime}">审核时间</td>
+                                <td style="display: none" th:text="${signin.opinion}">审核意见</td>
+                                <span th:switch="${signin.status eq '拒批'} or ${signin.status eq '未审批'}">
+                                <td style="display: none" th:case="false">
+                                    <a th:href="@{/zjh/signin/findSigninById(index=3)}">
+                                        <button style="margin-top:10px"
+                                                class="btn btn-outline btn-default disabled"
+                                                type="button"><i class="fa fa-support"></i>结办
+                                        </button>
+                                    </a>
+                                </td>
+                                <td style="display: none" th:case="true">
+                                    <a th:href="@{/zjh/signin/deleteSigninById(index=3, signinId = ${signin.signinId})}">
+                                        <button style="margin-top:10px" class="btn btn-outline btn-danger"
+                                                type="button">
+                                            <i class="fa fa-warning"></i> 删除
+                                        </button>
+                                    </a>
+                                </td>
+                                </span>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="col-sm-6">
+                            <div style="size:18px" class="dataTables_info" id="editable_info" role="alert"
+                                 aria-live="polite" aria-relevant="all">
+                                显示 <span th:text="(${page.current}-1)*6+1"/> 到 <span th:text="${page.current*6}"/> 项, 共
+                                <span th:text="${numberPages}"/> 项
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+                                    <span class="pagination">
+                                        <!--
+                                              gt：great than（大于）
+                                              ge：great equal（大于等于）
+                                              eq：equal（等于）
+                                              lt：less than（小于）
+                                              le：less equal（小于等于）
+                                              ne：not equal（不等于）
+                                        -->
+                                        <li class="paginate_button previous" aria-controls="editable" tabindex="0"
+                                            id="editable_start">
+                                            <a th:href="@{/zjh/signin/nextPage(index=3)}">首页</a>
+                                        </li>
+                                        <li class="paginate_button previous" aria-controls="editable" tabindex="0"
+                                            id="editable_previous"
+                                            th:switch="${page.current} gt 1">
+                                            <a th:case="true"
+                                               th:href="@{/zjh/signin/nextPage(index=3, pageNumber = ${page.current}-1)}">上一页</a>
+                                            <a th:case="false" th:href="@{javascript:alert('已经是第一页')}">上一页</a>
+                                        </li>
+                                        <li th:if="${page.current} gt 3">
+                                            . . .
+                                        </li>
+                                    </span>
+                                <span class="pagination" th:each="status,iterStat:${pagesList}"
+                                      th:switch="${page.current eq iterStat.count}">
+                                        <li class="paginate_button active disabled" aria-controls="editable"
+                                            tabindex="0" th:case="true">
+                                            <span th:text="${iterStat.count}"></span>
+                                        </li>
+                                        <li class="paginate_button" aria-controls="editable" tabindex="0"
+                                            th:case="false" th:if="${page.current} ne ${iterStat.count}">
+                                            <a th:if="${page.current + 2 >= iterStat.count && page.current - 2 <= iterStat.count}"
+                                               th:href="@{/zjh/signin/nextPage(index=3, pageNumber = ${iterStat.count})}">
+                                                <span th:text="${iterStat.count}"></span>
+                                            </a>
+                                        </li>
+                                    </span>
+                                <span class="pagination">
+                                        <li th:if="${pages - page.current} gt 2">
+                                            . . .
+                                        </li>
+                                        <li class="paginate_button next" aria-controls="editable" tabindex="0"
+                                            id="editable_end"
+                                            th:switch="${page.current} lt ${pages}">
+                                            <a th:case="true"
+                                               th:href="@{/zjh/signin/nextPage(index=3, pageNumber = ${page.current}+1)}">下一页</a>
+                                            <a th:case="false" th:href="@{javascript:alert('已经是最后一页')}">下一页</a>
+                                        </li>
+                                        <li>
+                                            <a th:href="@{/zjh/signin/nextPage(index=3, pageNumber = ${pages})}">尾页</a>
+                                        </li>
+                                    </span>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:include="signin/signin_add_user.html :: addSignin"></div>
+
+</body>
+<script type="text/javascript">
+    function addForm(stuNo) {
+        var timestamp = new Date().getTime();
+        // console.log("timestamp = " + timestamp);
+        var mun = parseInt(Math.random() * 900 + 100) + "";
+        // console.log("mun = " + mun);
+        document.getElementById("signinId").value = 'WZ' + timestamp + mun;
+        $("#selects").prop("selected", true);
+        document.getElementById("reason").value = '';
+        document.getElementById("dayNum").value = '';
+        document.getElementById("stuNo").value = stuNo;
+        document.getElementById("applyTime").value = '';
+        document.getElementById('signinId').readOnly = true;
+        document.getElementById('stuNo').readOnly = true;
+    }
+</script>
+<script type="text/javascript">
+    window.onload = function () {
+        switch ("[[${session.result}]]") {
+            case "addTrue":
+                Message('success', '√ -签到打卡提交成功!!!', 2000);
+                break;
+            case "addFalse":
+                Message('error', 'x -签到打卡提交失败!!!', 2000);
+                break;
+            case "deleteTrue":
+                Message('success', '√ -删除成功!!!', 2000);
+                break;
+            default:
+                break;
+        }
+        if (0 == "[[${pages}]]") {
+            Message('error', '数据数量为零!!!', 2000);
+        }
+    };
+</script>
+</html>
