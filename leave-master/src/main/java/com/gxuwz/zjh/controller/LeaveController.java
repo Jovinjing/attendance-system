@@ -5,17 +5,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gxuwz.zjh.entity.Leave;
-import com.gxuwz.zjh.entity.Student;
 import com.gxuwz.zjh.entity.User;
 import com.gxuwz.zjh.service.ILeaveService;
-import com.gxuwz.zjh.service.IStudentService;
-import io.swagger.models.auth.In;
+import com.gxuwz.zjh.service.IWorkerService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -38,7 +35,7 @@ public class LeaveController  extends AbstractController{
     private ILeaveService iLeaveService;
 
     @Autowired
-    private IStudentService iStudentService;
+    private IWorkerService iWorkerService;
 
 
     /***管理员的leave方法

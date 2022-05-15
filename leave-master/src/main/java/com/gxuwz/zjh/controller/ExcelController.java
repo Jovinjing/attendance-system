@@ -2,10 +2,10 @@ package com.gxuwz.zjh.controller;
 
 import com.gxuwz.zjh.entity.Classes;
 import com.gxuwz.zjh.entity.Leave;
-import com.gxuwz.zjh.entity.Student;
+import com.gxuwz.zjh.entity.Worker;
 import com.gxuwz.zjh.service.IClassesService;
 import com.gxuwz.zjh.service.ILeaveService;
-import com.gxuwz.zjh.service.IStudentService;
+import com.gxuwz.zjh.service.IWorkerService;
 import org.apache.ibatis.annotations.Param;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class ExcelController {
     @Autowired
     private IClassesService iClassesService;
     @Autowired
-    private IStudentService iStudentService;
+    private IWorkerService iWorkerService;
 
     /**
      * 导出界面跳转
@@ -51,13 +51,13 @@ public class ExcelController {
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("请假信息表");
 
-        Student student = new Student();
-        student.setClassId(classId);
-        List<Student> studentList = iStudentService.findStudentByClassId(student);
+        Worker worker = new Worker();
+        worker.setClassId(classId);
+        List<Worker> workerList = iWorkerService.findStudentByClassId(worker);
         List<Leave> leaveList = new LinkedList<>();
-        for(Student student1: studentList){
+        for(Worker worker1 : workerList){
             Leave leave = new Leave();
-            leave.setStuNo(student1.getStuId());
+            leave.setStuNo(worker1.getStuId());
             List<Leave> leaveList1 = iLeaveService.findLeaveByStuNo(leave);
             leaveList.addAll(leaveList1);
         }
@@ -67,7 +67,7 @@ public class ExcelController {
 
         int rowNum = 1;
 
-        String[] headers = { "请假编号", "课程编码", "请假理由", "天数", "学号", "请假时间", "状态", "审核时间", "审核意见"};
+        String[] headers = { "请假编号", "编码", "请假理由", "天数", "工号", "请假时间", "状态", "审核时间", "审核意见"};
         //headers表示excel表中第一行的表头
 
         HSSFRow row = sheet.createRow(0);

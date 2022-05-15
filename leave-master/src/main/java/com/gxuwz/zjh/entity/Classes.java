@@ -16,10 +16,10 @@ import org.apache.ibatis.type.Alias;
 @Alias("Classes") //别名
 public class Classes extends Thing{
 
-    @ApiModelProperty(value = "班级编号")
+    @ApiModelProperty(value = "编号")
     private String classId;
 
-    @ApiModelProperty(value = "班级名称")
+    @ApiModelProperty(value = "名称")
     private String className;
 
     @ApiModelProperty(value = "产品编号")

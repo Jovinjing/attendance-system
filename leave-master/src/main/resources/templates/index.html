@@ -65,7 +65,7 @@
                             <a class="J_menuItem" th:href="@{/zjh/user/findUserById2}">员工财务信息管理</a>
                         </li>
                         <li th:if="${session.user.fullName eq '总经理'} or ${session.user.fullName eq '部门经理'}">
-                            <a class="J_menuItem" th:href="@{/zjh/student/findStudentById}">员工信息管理</a>
+                            <a class="J_menuItem" th:href="@{/zjh/worker/findStudentById}">员工信息管理</a>
                         </li>
                         <li th:if="${session.user.fullName eq '总经理'}">
                             <a class="J_menuItem" th:href="@{/zjh/instructor/findInstructorById}">部门经理管理</a>
@@ -79,12 +79,6 @@
                         <li th:if="${session.user.fullName eq '人事处员工'}">
                             <a class="J_menuItem" th:href="@{/zjh/course/findCourseById}">请假类型管理</a>
                         </li>
-                        <!--                        <li th:if="${session.user.fullName eq '总经理'}">-->
-                        <!--                            <a class="J_menuItem" th:href="@{/zjh/leave/findLeaveById(index=1)}">员工请假管理</a>-->
-                        <!--                        </li>-->
-                        <!--                        <li th:if="${session.user.fullName eq '总经理'}">-->
-                        <!--                            <a class="J_menuItem" th:href="@{/zjh/leave/findRestById(index=1)}">员工调休管理</a>-->
-                        <!--                        </li>-->
                     </ul>
                 </li>
                 <li>

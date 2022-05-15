@@ -21,14 +21,14 @@
                             <h3 class="m-t-none m-b" style="margin-bottom:30px"><i class="fa fa-paste"></i> 新增(修改) 员工信息
                             </h3>
 
-                            <form th:action="@{/zjh/student/addEditStudent}" method="post">
+                            <form th:action="@{/zjh/worker/addEditStudent}" method="post">
                                 <div class="form-group">
                                     <label>工号：</label>
-                                    <input type="text" id="stuId" name="stuId" placeholder="请输入学号" class="form-control">
+                                    <input type="text" id="stuId" name="stuId" placeholder="请输入工号" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="display: none">
                                     <label>编号：</label>
-                                    <input type="text" id="classId" name="classId" placeholder="请输入班号"
+                                    <input type="text" id="classId" name="classId" placeholder="请输入编号"
                                            class="form-control">
                                 </div>
                                 <div class="form-group">

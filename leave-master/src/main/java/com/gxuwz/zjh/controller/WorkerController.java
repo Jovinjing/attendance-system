@@ -4,10 +4,8 @@ package com.gxuwz.zjh.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.gxuwz.zjh.entity.Student;
-import com.gxuwz.zjh.entity.User;
-import com.gxuwz.zjh.service.IStudentService;
-import com.gxuwz.zjh.service.IUserService;
+import com.gxuwz.zjh.entity.Worker;
+import com.gxuwz.zjh.service.IWorkerService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,15 +20,15 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/zjh/student")
-public class StudentController  extends AbstractController{
+public class WorkerController extends AbstractController{
 
     @Autowired
-    private IStudentService iStudentService;
+    private IWorkerService iWorkerService;
 
     /**
      * 根据是否存在模糊查询内容跳转到不同的分页查询方法
      * @param modelAndView
-     * @param student
+     * @param worker
      * @param pageNumber
      * @param page
      * @param request
@@ -39,22 +37,22 @@ public class StudentController  extends AbstractController{
 
     @ResponseBody
     @GetMapping(value = "/nextPage")
-    public ModelAndView nextPage(ModelAndView modelAndView, Student student, Integer pageNumber,
+    public ModelAndView nextPage(ModelAndView modelAndView, Worker worker, Integer pageNumber,
                                  Page page, HttpServletRequest request) {
         if(request.getSession().getAttribute("result") != null){
             request.getSession().setAttribute("result", "");
         }
-        if(student.getStuId() == null){
+        if(worker.getStuId() == null){
             return findStudentAll(modelAndView, page, pageNumber, request);
         }else {
-            return findStudentById(modelAndView, student, pageNumber, page, request);
+            return findStudentById(modelAndView, worker, pageNumber, page, request);
         }
     }
 
     /**
      * 根据对应用户id查询信息
      * @param modelAndView
-     * @param student
+     * @param worker
      * @param pageNumber
      * @param page
      * @param request
@@ -62,19 +60,19 @@ public class StudentController  extends AbstractController{
      */
 
     @GetMapping(value = "/findStudentById")
-    public ModelAndView findStudentById(ModelAndView modelAndView, Student student, Integer pageNumber,
-                                     Page page, HttpServletRequest request) {
+    public ModelAndView findStudentById(ModelAndView modelAndView, Worker worker, Integer pageNumber,
+                                        Page page, HttpServletRequest request) {
         if(request.getSession().getAttribute("result") != null){
             request.getSession().setAttribute("result", "");
         }
         // 可以通过 wrapper 进行筛选!!!
-        QueryWrapper<Student> wrapper = new QueryWrapper<>();
+        QueryWrapper<Worker> wrapper = new QueryWrapper<>();
         wrapper.orderByAsc("stu_id");
         String[] keysWord = null;
         // 对User进行模糊查询!!!
-        if(student != null & student.getStuId() != null){
-            wrapper.like("stu_id", student.getStuId());
-            modelAndView.addObject("student", student);
+        if(worker != null & worker.getStuId() != null){
+            wrapper.like("stu_id", worker.getStuId());
+            modelAndView.addObject("student", worker);
         }
         // Current,页码 + Size,每页条数
         if(pageNumber == null){
@@ -85,7 +83,7 @@ public class StudentController  extends AbstractController{
         // 默认每页6行数据！
         page.setSize(6);
         // 调用分页查询方法！!
-        IPage<Student> studentIPage = iStudentService.selectPage(page, wrapper);
+        IPage<Worker> studentIPage = iWorkerService.selectPage(page, wrapper);
         // 存放一个数组用来让foreach遍历
         int[] pagesList = new int[(int)studentIPage.getPages()];
         for(int i=0; i< (int)studentIPage.getPages(); i++){
@@ -99,9 +97,9 @@ public class StudentController  extends AbstractController{
         // 存放总页数
         modelAndView.addObject("pages", (int)studentIPage.getPages());
         modelAndView.addObject("numberPages", studentIPage.getTotal());
-        List<Student> studentList = studentIPage.getRecords();
-        System.out.println("studentList = "+studentList);
-        modelAndView.addObject("studentList", studentList);
+        List<Worker> workerList = studentIPage.getRecords();
+        System.out.println("studentList = "+ workerList);
+        modelAndView.addObject("studentList", workerList);
 
         modelAndView.setViewName("student/student_list");
         return modelAndView;
@@ -119,7 +117,7 @@ public class StudentController  extends AbstractController{
     public ModelAndView findStudentAll(ModelAndView modelAndView, Page page, Integer pageNumber,
                                     HttpServletRequest request) {
         // 可以通过 wrapper 进行筛选!!!
-        QueryWrapper<Student> wrapper = new QueryWrapper<>();
+        QueryWrapper<Worker> wrapper = new QueryWrapper<>();
         wrapper.orderByAsc("stu_id");
         // Current,页码 + Size,每页条数
         if(pageNumber == null){
@@ -130,7 +128,7 @@ public class StudentController  extends AbstractController{
         // 默认每页6行数据！
         page.setSize(6);
         // 调用分页查询方法！!
-        IPage<Student> studentIPage = iStudentService.selectPage(page, wrapper);
+        IPage<Worker> studentIPage = iWorkerService.selectPage(page, wrapper);
         HttpSession session = request.getSession();
         // 存放page，内有当前页数
         modelAndView.addObject("page", page);
@@ -145,9 +143,9 @@ public class StudentController  extends AbstractController{
         }
         modelAndView.addObject("pagesList", pagesList);
         modelAndView.addObject("numberPages", studentIPage.getTotal());
-        List<Student> studentList = studentIPage.getRecords();
-        System.out.println("studentList = "+studentList);
-        modelAndView.addObject("studentList", studentList);
+        List<Worker> workerList = studentIPage.getRecords();
+        System.out.println("studentList = "+ workerList);
+        modelAndView.addObject("studentList", workerList);
 
         modelAndView.setViewName("student/student_list");
         return modelAndView;
@@ -155,29 +153,29 @@ public class StudentController  extends AbstractController{
 
     /**
      * 添加信息 / 修改信息
-     * @param student
+     * @param worker
      * @return
      */
     @PostMapping(value = "/addEditStudent")
-    public String addEditStudent(Student student, HttpServletRequest request) {
-        Student student1 = iStudentService.findById(student);
-        System.out.println("student = " + student);
-        System.out.println("student1 = " + student1);
+    public String addEditStudent(Worker worker, HttpServletRequest request) {
+        Worker worker1 = iWorkerService.findById(worker);
+        System.out.println("student = " + worker);
+        System.out.println("student1 = " + worker1);
         // 新增用户信息
-        if(student1 == null){
+        if(worker1 == null){
             System.out.println("进入新增用户");
             try {
-                iStudentService.addObject(student);
+                iWorkerService.addObject(worker);
                 request.getSession().setAttribute("result", "addTrue");
             }catch (Exception e){
                 request.getSession().setAttribute("result", "addFalse");
             }
         }
         // 修改用户信息
-        if(student1 != null){
+        if(worker1 != null){
             System.out.println("进入修改用户");
             try {
-                iStudentService.updateById(student);
+                iWorkerService.updateById(worker);
                 request.getSession().setAttribute("result", "editTrue");
             }catch (Exception e){
                 request.getSession().setAttribute("result", "editFalse");
@@ -193,10 +191,10 @@ public class StudentController  extends AbstractController{
      */
     @GetMapping(value = "/deleteStudentById")
     public String deleteStudentById(HttpServletRequest request, @Param("stuId") String stuId) {
-        Student student = new Student();
-        student.setStuId(stuId);
+        Worker worker = new Worker();
+        worker.setStuId(stuId);
         try {
-            iStudentService.deleteById(student);
+            iWorkerService.deleteById(worker);
             request.getSession().setAttribute("result", "deleteTrue");
         }catch (Exception e){
 

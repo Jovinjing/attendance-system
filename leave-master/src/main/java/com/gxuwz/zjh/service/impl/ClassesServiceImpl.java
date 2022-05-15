@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * 班级表 服务实现类
- */
+
 @Service
 public class ClassesServiceImpl implements IClassesService{
 

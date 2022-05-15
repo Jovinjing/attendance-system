@@ -13,7 +13,7 @@ public class Signin {
     @ApiModelProperty(value = "请假编号")
     private String signinId;
 
-    @ApiModelProperty(value = "课程编码")
+    @ApiModelProperty(value = "编码")
     private String courseId;
 
     @ApiModelProperty(value = "请假理由")
@@ -22,7 +22,7 @@ public class Signin {
     @ApiModelProperty(value = "天数")
     private String dayNum;
 
-    @ApiModelProperty(value = "学号")
+    @ApiModelProperty(value = "工号")
     private String stuNo;
 
     @ApiModelProperty(value = "请假时间")

@@ -60,9 +60,9 @@
                                 <th style="text-align:center;width:15%">请假类型名称</th>
                                 <th style="text-align:center;width:15%">编号</th>
                                 <th style="text-align:center;width:15%">请假类型名称</th>
-                                <th style="text-align:center;width:10%;display: none">学年</th>
-                                <th style="text-align:center;width:10%;display: none">学期</th>
-                                <th style="text-align:center;width:10%;display: none">学时</th>
+                                <th style="text-align:center;width:10%;display: none">年</th>
+                                <th style="text-align:center;width:10%;display: none">期</th>
+                                <th style="text-align:center;width:10%;display: none">时</th>
                                 <th style="text-align:center;width:25%">操作</th>
                             </tr>
                             </thead>
@@ -71,9 +71,9 @@
                                 <td th:text="${course.courseId}">请假类型名称</td>
                                 <td th:text="${course.classId}">编号</td>
                                 <td th:text="${course.courseName}">请假类型名称</td>
-                                <td style="display: none" th:text="${course.year}">学年</td>
-                                <td style="display: none" th:text="${course.term}">学期</td>
-                                <td style="display: none" th:text="${course.hour}">学时</td>
+                                <td style="display: none" th:text="${course.year}">年</td>
+                                <td style="display: none" th:text="${course.term}">期</td>
+                                <td style="display: none" th:text="${course.hour}">时</td>
                                 <td>
                                     <a data-toggle="modal" href="course_list.html#modal-form"
                                        th:data-courseId="${course.courseId}"

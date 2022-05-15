@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * 课程表 Mapper 接口
+ * 表 Mapper 接口
  */
 @Mapper
 @Repository

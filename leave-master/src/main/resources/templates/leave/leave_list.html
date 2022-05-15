@@ -60,7 +60,7 @@
                                         <th style="text-align:center;width:10%">请假类型</th>
                                         <th style="text-align:center;width:10%">请假理由</th>
                                         <th style="text-align:center;width:7%">天数</th>
-                                        <th style="text-align:center;width:10%">学号</th>
+                                        <th style="text-align:center;width:10%">工号</th>
                                         <th style="text-align:center;width:10%">请假时间</th>
                                         <th style="text-align:center;width:8%">状态</th>
                                         <th style="text-align:center;width:10%">审核时间</th>
@@ -78,7 +78,7 @@
                                         </span>
                                         <td th:text="${leave.reason}">请假理由</td>
                                         <td th:text="${leave.dayNum}">天数</td>
-                                        <td th:text="${leave.stuNo}">学号</td>
+                                        <td th:text="${leave.stuNo}">工号</td>
                                         <td th:text="${leave.applyTime}">请假时间</td>
                                         <span th:switch="${leave.status eq '通过'} or ${leave.status eq '拒批'}">
                                             <span th:case="true">

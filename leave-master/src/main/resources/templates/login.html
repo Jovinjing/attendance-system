@@ -98,11 +98,12 @@
                      th:src="@{/img/tianda.jpg}"
                 ></h1>
         </div>
-        <h2 style="color: black;" th:text="#{login.welcome}">公司考勤系统</h2>
+        <h2 style="color: black;" th:text="#{login.welcome}">员工考勤管理系统</h2>
 
         <form class="m-t" role="form" th:action="@{/login.action}" method="post" onsubmit="return validate()">
             <div class="form-group">
-                <input type="text" name="userId" value="201809512327" class="form-control" th:placeholder="#{login.username}"
+                <input type="text" name="userId" value="201809512327" class="form-control"
+                       th:placeholder="#{login.username}"
                        required=""
                        onkeyup="value=value.replace(/[^0-9]/g,'')" onpaste="value=value.replace(/[^0-9]/g,'')"
                        oncontextmenu="value=value.replace(/[^0-9]/g,'')">

@@ -29,15 +29,6 @@
                 <div class="ibox-content" style="margin-bottom:50px">
                     <div class="row">
                         <div class="col-sm-3">
-                            <div class="input-group">
-                                <input style="height:35px;" type="text" placeholder="请输入关键词" id="keywords"
-                                       class="input-sm form-control">
-                                <span class="input-group-btn">
-                                        <button style="height:35px;width:80px;" type="button"
-                                                class="btn btn-sm btn-primary"
-                                                href="javascript:;" onclick="query()"> 搜索</button>
-                                    </span>
-                            </div>
                         </div>
                         <script type="text/javascript">
                             // 模糊查询
@@ -61,8 +52,8 @@
                                 <td th:text="${user.userId}">账号</td>
                                 <td th:text="${user.fullName}">姓名</td>
                                 <td th:text="${user.telephone}">电话</td>
-                                <td>
-                                    10000
+                                <td id="field">
+                                    12000
                                 </td>
                             </tr>
                             </tbody>
@@ -165,7 +156,7 @@
             document.getElementById("fullName1").checked = false;
             document.getElementById("fullName2").checked = true;
             document.getElementById("fullName3").checked = false;
-        } else if (fullName == "学生") {
+        } else if (fullName == "工人") {
             document.getElementById("fullName1").checked = false;
             document.getElementById("fullName2").checked = false;
             document.getElementById("fullName3").checked = true;
@@ -201,7 +192,7 @@
         if (0 == "[[${pages}]]") {
             Message('error', '数据数量为零!!!', 2000);
         }
-
+        // document.getElementById("field").value = Math.floor(Math.random() * 5 + 5) + Math.ceil(Math.random() * 10) / 10
     };
 </script>
 </html>

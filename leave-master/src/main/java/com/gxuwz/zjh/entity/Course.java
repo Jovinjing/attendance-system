@@ -12,28 +12,28 @@ import lombok.EqualsAndHashCode;
 import org.apache.ibatis.type.Alias;
 
 /**
- * 课程表
+ * 表
  */
 @Data
 @Alias("Course") //别名
 public class Course extends Thing{
 
-    @ApiModelProperty(value = "课程名称")
+    @ApiModelProperty(value = "名称")
     private String courseId;
 
     @ApiModelProperty(value = "班号")
     private String classId;
 
-    @ApiModelProperty(value = "课程名称")
+    @ApiModelProperty(value = "名称")
     private String courseName;
 
-    @ApiModelProperty(value = "学年")
+    @ApiModelProperty(value = "年")
     private String year;
 
-    @ApiModelProperty(value = "学期")
+    @ApiModelProperty(value = "期")
     private String term;
 
-    @ApiModelProperty(value = "学时")
+    @ApiModelProperty(value = "时")
     private String hour;
 
     private LocalDateTime createTime;

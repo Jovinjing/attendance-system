@@ -49,7 +49,7 @@
                         <script type="text/javascript">
                             // 模糊查询
                             function query() {
-                                window.location.href = "/zjh/student/findStudentById?stuId=" + $("#keywords").val() + "";
+                                window.location.href = "/zjh/worker/findStudentById?stuId=" + $("#keywords").val() + "";
                             }
                         </script>
                     </div>
@@ -69,28 +69,28 @@
                             </tr>
                             </thead>
                             <tbody style="text-align:center;size:18px">
-                            <tr th:each="student : ${studentList}">
-                                <td th:text="${student.stuId}">工号</td>
-                                <td th:text="${student.classId}">编号</td>
-                                <td th:text="${student.stuName}">姓名</td>
-                                <td th:switch="${student.sex} eq 1">
+                            <tr th:each="worker : ${workerList}">
+                                <td th:text="${worker.stuId}">工号</td>
+                                <td th:text="${worker.classId}">编号</td>
+                                <td th:text="${worker.stuName}">姓名</td>
+                                <td th:switch="${worker.sex} eq 1">
                                     <span th:case="true" th:text="男">男</span>
                                     <span th:case="false" th:text="女">女</span>
                                 </td>
-                                <td th:text="${student.address}">通讯地址</td>
-                                <td th:text="${student.stuTel}">联系电话</td>
-                                <td th:text="${student.contact}">联系人</td>
-                                <td th:text="${student.contactTel}">联系人电话</td>
+                                <td th:text="${worker.address}">通讯地址</td>
+                                <td th:text="${worker.stuTel}">联系电话</td>
+                                <td th:text="${worker.contact}">联系人</td>
+                                <td th:text="${worker.contactTel}">联系人电话</td>
                                 <td>
                                     <a data-toggle="modal" href="student_list.html#modal-form"
-                                       th:data-stuId="${student.stuId}"
-                                       th:data-classId="${student.classId}"
-                                       th:data-stuName="${student.stuName}"
-                                       th:data-sex="${student.sex}"
-                                       th:data-address="${student.address}"
-                                       th:data-stuTel="${student.stuTel}"
-                                       th:data-contact="${student.contact}"
-                                       th:data-contactTel="${student.contactTel}"
+                                       th:data-stuId="${worker.stuId}"
+                                       th:data-classId="${worker.classId}"
+                                       th:data-stuName="${worker.stuName}"
+                                       th:data-sex="${worker.sex}"
+                                       th:data-address="${worker.address}"
+                                       th:data-stuTel="${worker.stuTel}"
+                                       th:data-contact="${worker.contact}"
+                                       th:data-contactTel="${worker.contactTel}"
                                        onclick="editForm(this.getAttribute('data-stuId'),
                                                this.getAttribute('data-classId'),
                                                this.getAttribute('data-stuName'),
@@ -104,7 +104,7 @@
                                             <i class="fa fa-paste"></i> 修改
                                         </button>
                                     </a>
-                                    <a th:href="@{/zjh/student/deleteStudentById(stuId = ${student.stuId})}">
+                                    <a th:href="@{/zjh/worker/deleteStudentById(stuId = ${worker.stuId})}">
                                         <button style="margin-top:10px" class="btn btn-outline btn-danger "
                                                 type="button">
                                             <i class="fa fa-warning"></i> 删除
@@ -134,13 +134,13 @@
                                         -->
                                         <li class="paginate_button previous" aria-controls="editable" tabindex="0"
                                             id="editable_start">
-                                            <a th:href="@{/zjh/student/nextPage}">首页</a>
+                                            <a th:href="@{/zjh/worker/nextPage}">首页</a>
                                         </li>
                                         <li class="paginate_button previous" aria-controls="editable" tabindex="0"
                                             id="editable_previous"
                                             th:switch="${page.current} gt 1">
                                             <a th:case="true"
-                                               th:href="@{/zjh/student/nextPage(pageNumber = ${page.current}-1)}">上一页</a>
+                                               th:href="@{/zjh/worker/nextPage(pageNumber = ${page.current}-1)}">上一页</a>
                                             <a th:case="false" th:href="@{javascript:alert('已经是第一页')}">上一页</a>
                                         </li>
                                         <li th:if="${page.current} gt 3">
@@ -156,7 +156,7 @@
                                         <li class="paginate_button" aria-controls="editable" tabindex="0"
                                             th:case="false" th:if="${page.current} ne ${iterStat.count}">
                                             <a th:if="${page.current + 2 >= iterStat.count && page.current - 2 <= iterStat.count}"
-                                               th:href="@{/zjh/student/nextPage(pageNumber = ${iterStat.count})}">
+                                               th:href="@{/zjh/worker/nextPage(pageNumber = ${iterStat.count})}">
                                                 <span th:text="${iterStat.count}"></span>
                                             </a>
                                         </li>
@@ -169,11 +169,11 @@
                                             id="editable_end"
                                             th:switch="${page.current} lt ${pages}">
                                             <a th:case="true"
-                                               th:href="@{/zjh/student/nextPage(pageNumber = ${page.current}+1)}">下一页</a>
+                                               th:href="@{/zjh/worker/nextPage(pageNumber = ${page.current}+1)}">下一页</a>
                                             <a th:case="false" th:href="@{javascript:alert('已经是最后一页')}">下一页</a>
                                         </li>
                                         <li>
-                                            <a th:href="@{/zjh/student/nextPage(pageNumber = ${pages})}">尾页</a>
+                                            <a th:href="@{/zjh/worker/nextPage(pageNumber = ${pages})}">尾页</a>
                                         </li>
                                     </span>
                                 </ul>
@@ -188,7 +188,7 @@
     </div>
 </div>
 
-<div th:include="student/student_add.html :: addStudent"></div>
+<div th:include="worker/student_add.html :: addStudent"></div>
 
 </body>
 <script type="text/javascript">

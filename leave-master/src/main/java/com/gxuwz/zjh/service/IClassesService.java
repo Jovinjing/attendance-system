@@ -5,7 +5,7 @@ import com.gxuwz.zjh.service.baseServices.AbstractService;
 import com.gxuwz.zjh.service.baseServices.SelectPageService;
 
 /**
- * 班级表 服务类
+ * 表 服务类
  */
 public interface IClassesService extends AbstractService<Classes>, SelectPageService<Classes> {
 

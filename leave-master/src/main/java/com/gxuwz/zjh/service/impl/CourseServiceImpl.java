@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 课程表 服务实现类
+ * 表 服务实现类
  */
 @Service
 public class CourseServiceImpl implements ICourseService {

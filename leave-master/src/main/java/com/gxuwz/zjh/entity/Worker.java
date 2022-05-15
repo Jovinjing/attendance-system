@@ -12,13 +12,13 @@ import lombok.EqualsAndHashCode;
 import org.apache.ibatis.type.Alias;
 
 /**
- * 学生表
+ * 工人表
  */
 @Data
-@Alias("Student") //别名
-public class Student extends Thing {
+@Alias("Worker") //别名
+public class Worker extends Thing {
 
-    @ApiModelProperty(value = "学号")
+    @ApiModelProperty(value = "工号")
     private String stuId;
 
     @ApiModelProperty(value = "班号")
@@ -33,7 +33,7 @@ public class Student extends Thing {
     @ApiModelProperty(value = "通讯地址")
     private String address;
 
-    @ApiModelProperty(value = "学生电话")
+    @ApiModelProperty(value = "工人电话")
     private String stuTel;
 
     @ApiModelProperty(value = "联系人")

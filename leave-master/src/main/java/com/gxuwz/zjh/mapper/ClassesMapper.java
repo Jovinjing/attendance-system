@@ -13,9 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * 班级表 Mapper 接口
- */
+
 @Mapper
 @Repository
 public interface ClassesMapper {
@@ -37,5 +35,5 @@ public interface ClassesMapper {
 
     // 删除用户信息
     void deleteClassesById(Classes classes);
-    
+
 }
