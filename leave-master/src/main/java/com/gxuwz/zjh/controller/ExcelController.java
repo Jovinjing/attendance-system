@@ -53,7 +53,7 @@ public class ExcelController {
 
         Worker worker = new Worker();
         worker.setClassId(classId);
-        List<Worker> workerList = iWorkerService.findStudentByClassId(worker);
+        List<Worker> workerList = iWorkerService.findWorkerByClassId(worker);
         List<Leave> leaveList = new LinkedList<>();
         for(Worker worker1 : workerList){
             Leave leave = new Leave();

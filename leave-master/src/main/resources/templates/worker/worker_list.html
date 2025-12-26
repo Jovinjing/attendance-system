@@ -20,7 +20,7 @@
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
                         </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="student_list.html#">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="worker_list.html#">
                             <i class="fa fa-wrench"></i>
                         </a>
                     </div>
@@ -29,7 +29,7 @@
                 <div class="ibox-content" style="margin-bottom:50px">
                     <div class="row">
                         <div class="col-sm-2 m-b-xs">
-                            <a data-toggle="modal" href="student_list.html#modal-form" onclick="addForm()">
+                            <a data-toggle="modal" href="worker_list.html#modal-form" onclick="addForm()">
                                 <button style="width:130px" class="btn btn-outline btn-primary" type="button">
                                     <i class="fa fa-plus"></i> 新增员工
                                 </button>
@@ -49,7 +49,7 @@
                         <script type="text/javascript">
                             // 模糊查询
                             function query() {
-                                window.location.href = "/zjh/worker/findStudentById?stuId=" + $("#keywords").val() + "";
+                                window.location.href = "/zjh/worker/findWorkerById?stuId=" + $("#keywords").val() + "";
                             }
                         </script>
                     </div>
@@ -82,7 +82,7 @@
                                 <td th:text="${worker.contact}">联系人</td>
                                 <td th:text="${worker.contactTel}">联系人电话</td>
                                 <td>
-                                    <a data-toggle="modal" href="student_list.html#modal-form"
+                                    <a data-toggle="modal" href="worker_list.html#modal-form"
                                        th:data-stuId="${worker.stuId}"
                                        th:data-classId="${worker.classId}"
                                        th:data-stuName="${worker.stuName}"
@@ -104,7 +104,7 @@
                                             <i class="fa fa-paste"></i> 修改
                                         </button>
                                     </a>
-                                    <a th:href="@{/zjh/worker/deleteStudentById(stuId = ${worker.stuId})}">
+                                    <a th:href="@{/zjh/worker/deleteWorkerById(stuId = ${worker.stuId})}">
                                         <button style="margin-top:10px" class="btn btn-outline btn-danger "
                                                 type="button">
                                             <i class="fa fa-warning"></i> 删除
@@ -139,8 +139,8 @@
                                         <li class="paginate_button previous" aria-controls="editable" tabindex="0"
                                             id="editable_previous"
                                             th:switch="${page.current} gt 1">
-                                            <a th:case="true"
-                                               th:href="@{/zjh/worker/nextPage(pageNumber = ${page.current}-1)}">上一页</a>
+                                                          <a th:case="true"
+                                                              th:href="@{/zjh/worker/nextPage(pageNumber = ${page.current}-1)}">上一页</a>
                                             <a th:case="false" th:href="@{javascript:alert('已经是第一页')}">上一页</a>
                                         </li>
                                         <li th:if="${page.current} gt 3">
@@ -155,8 +155,8 @@
                                         </li>
                                         <li class="paginate_button" aria-controls="editable" tabindex="0"
                                             th:case="false" th:if="${page.current} ne ${iterStat.count}">
-                                            <a th:if="${page.current + 2 >= iterStat.count && page.current - 2 <= iterStat.count}"
-                                               th:href="@{/zjh/worker/nextPage(pageNumber = ${iterStat.count})}">
+                                                          <a th:if="${page.current + 2 >= iterStat.count && page.current - 2 <= iterStat.count}"
+                                                              th:href="@{/zjh/worker/nextPage(pageNumber = ${iterStat.count})}">
                                                 <span th:text="${iterStat.count}"></span>
                                             </a>
                                         </li>
@@ -168,8 +168,8 @@
                                         <li class="paginate_button next" aria-controls="editable" tabindex="0"
                                             id="editable_end"
                                             th:switch="${page.current} lt ${pages}">
-                                            <a th:case="true"
-                                               th:href="@{/zjh/worker/nextPage(pageNumber = ${page.current}+1)}">下一页</a>
+                                                          <a th:case="true"
+                                                              th:href="@{/zjh/worker/nextPage(pageNumber = ${page.current}+1)}">下一页</a>
                                             <a th:case="false" th:href="@{javascript:alert('已经是最后一页')}">下一页</a>
                                         </li>
                                         <li>
@@ -188,7 +188,7 @@
     </div>
 </div>
 
-<div th:include="worker/student_add.html :: addStudent"></div>
+<div th:include="worker/worker_add.html :: addStudent"></div>
 
 </body>
 <script type="text/javascript">

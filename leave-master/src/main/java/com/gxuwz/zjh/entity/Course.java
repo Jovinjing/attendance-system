@@ -21,7 +21,7 @@ public class Course extends Thing{
     @ApiModelProperty(value = "名称")
     private String courseId;
 
-    @ApiModelProperty(value = "班号")
+    @ApiModelProperty(value = "部门号")
     private String classId;
 
     @ApiModelProperty(value = "名称")

@@ -12,6 +12,12 @@
 <%@ page import="org.apache.commons.fileupload.servlet.*"%>
 <%@ page import="org.apache.commons.fileupload.util.*"%>
 <%@ page import="com.alibaba.fastjson.*"%>
+<%@ page import="org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory" %>
+<%@ page import="org.apache.tomcat.util.http.fileupload.FileItemFactory" %>
+<%@ page import="org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload" %>
+<%@ page import="org.apache.tomcat.util.http.fileupload.FileItemIterator" %>
+<%@ page import="org.apache.tomcat.util.http.fileupload.FileItemStream" %>
+<%@ page import="org.apache.tomcat.util.http.fileupload.util.Streams" %>
 <%
 String contentType = request.getContentType();
 

@@ -19,23 +19,23 @@ import java.util.List;
 public interface WorkerMapper {
 
     // 根据 id 查询对应用户信息
-    Worker findStudentById(Worker worker);
+    Worker findWorkerById(Worker worker);
 
-    List<Worker> findStudentByClassId(Worker worker);
+    List<Worker> findWorkerByClassId(Worker worker);
 
     // 查询全部用户信息
-    List<Worker> findStudentAll();
+    List<Worker> findWorkerAll();
 
     //自定义sql 分页
-    IPage<Worker> selectStudentPage(Page<Worker> page, @Param(Constants.WRAPPER) Wrapper<Worker> wrapper);
+    IPage<Worker> selectWorkerPage(Page<Worker> page, @Param(Constants.WRAPPER) Wrapper<Worker> wrapper);
 
     // 添加用户信息
-    void addStudent(Worker worker);
+    void addWorker(Worker worker);
 
     // 修改用户信息
-    void updateStudentById(Worker worker);
+    void updateWorkerById(Worker worker);
 
     // 删除用户信息
-    void deleteStudentById(Worker worker);
+    void deleteWorkerById(Worker worker);
 
 }

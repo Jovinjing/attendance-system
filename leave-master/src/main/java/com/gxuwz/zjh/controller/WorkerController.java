@@ -19,7 +19,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/zjh/student")
+@RequestMapping("/zjh/worker")
 public class WorkerController extends AbstractController{
 
     @Autowired
@@ -43,9 +43,9 @@ public class WorkerController extends AbstractController{
             request.getSession().setAttribute("result", "");
         }
         if(worker.getStuId() == null){
-            return findStudentAll(modelAndView, page, pageNumber, request);
+            return findWorkerAll(modelAndView, page, pageNumber, request);
         }else {
-            return findStudentById(modelAndView, worker, pageNumber, page, request);
+            return findWorkerById(modelAndView, worker, pageNumber, page, request);
         }
     }
 
@@ -59,8 +59,8 @@ public class WorkerController extends AbstractController{
      * @return
      */
 
-    @GetMapping(value = "/findStudentById")
-    public ModelAndView findStudentById(ModelAndView modelAndView, Worker worker, Integer pageNumber,
+    @GetMapping(value = "/findWorkerById")
+    public ModelAndView findWorkerById(ModelAndView modelAndView, Worker worker, Integer pageNumber,
                                         Page page, HttpServletRequest request) {
         if(request.getSession().getAttribute("result") != null){
             request.getSession().setAttribute("result", "");
@@ -72,7 +72,7 @@ public class WorkerController extends AbstractController{
         // 对User进行模糊查询!!!
         if(worker != null & worker.getStuId() != null){
             wrapper.like("stu_id", worker.getStuId());
-            modelAndView.addObject("student", worker);
+            modelAndView.addObject("Worker", worker);
         }
         // Current,页码 + Size,每页条数
         if(pageNumber == null){
@@ -83,25 +83,25 @@ public class WorkerController extends AbstractController{
         // 默认每页6行数据！
         page.setSize(6);
         // 调用分页查询方法！!
-        IPage<Worker> studentIPage = iWorkerService.selectPage(page, wrapper);
+        IPage<Worker> WorkerIPage = iWorkerService.selectPage(page, wrapper);
         // 存放一个数组用来让foreach遍历
-        int[] pagesList = new int[(int)studentIPage.getPages()];
-        for(int i=0; i< (int)studentIPage.getPages(); i++){
+        int[] pagesList = new int[(int)WorkerIPage.getPages()];
+        for(int i=0; i< (int)WorkerIPage.getPages(); i++){
             pagesList[i] = i+1;
         }
         modelAndView.addObject("pagesList", pagesList);
         // 存放page，内有当前页数
         modelAndView.addObject("page", page);
-        System.out.println("总条数"+studentIPage.getTotal());
-        System.out.println("总页数"+studentIPage.getPages());
+        System.out.println("总条数"+WorkerIPage.getTotal());
+        System.out.println("总页数"+WorkerIPage.getPages());
         // 存放总页数
-        modelAndView.addObject("pages", (int)studentIPage.getPages());
-        modelAndView.addObject("numberPages", studentIPage.getTotal());
-        List<Worker> workerList = studentIPage.getRecords();
-        System.out.println("studentList = "+ workerList);
-        modelAndView.addObject("studentList", workerList);
+        modelAndView.addObject("pages", (int)WorkerIPage.getPages());
+        modelAndView.addObject("numberPages", WorkerIPage.getTotal());
+        List<Worker> workerList = WorkerIPage.getRecords();
+        System.out.println("WorkerList = "+ workerList);
+        modelAndView.addObject("workerList", workerList);
 
-        modelAndView.setViewName("student/student_list");
+        modelAndView.setViewName("worker/worker_list");
         return modelAndView;
     }
 
@@ -113,8 +113,8 @@ public class WorkerController extends AbstractController{
      * @param request
      * @return ModelAndView
      */
-    @GetMapping(value = "/findStudentAll")
-    public ModelAndView findStudentAll(ModelAndView modelAndView, Page page, Integer pageNumber,
+    @GetMapping(value = "/findWorkerAll")
+    public ModelAndView findWorkerAll(ModelAndView modelAndView, Page page, Integer pageNumber,
                                     HttpServletRequest request) {
         // 可以通过 wrapper 进行筛选!!!
         QueryWrapper<Worker> wrapper = new QueryWrapper<>();
@@ -128,26 +128,26 @@ public class WorkerController extends AbstractController{
         // 默认每页6行数据！
         page.setSize(6);
         // 调用分页查询方法！!
-        IPage<Worker> studentIPage = iWorkerService.selectPage(page, wrapper);
+        IPage<Worker> WorkerIPage = iWorkerService.selectPage(page, wrapper);
         HttpSession session = request.getSession();
         // 存放page，内有当前页数
         modelAndView.addObject("page", page);
-        System.out.println("总条数"+studentIPage.getTotal());
-        System.out.println("总页数"+studentIPage.getPages());
+        System.out.println("总条数"+WorkerIPage.getTotal());
+        System.out.println("总页数"+WorkerIPage.getPages());
         // 存放总页数
-        modelAndView.addObject("pages", (int)studentIPage.getPages());
+        modelAndView.addObject("pages", (int)WorkerIPage.getPages());
         // 存放一个数组用来让foreach遍历
-        int[] pagesList = new int[(int)studentIPage.getPages()];
-        for(int i=0; i< (int)studentIPage.getPages(); i++){
+        int[] pagesList = new int[(int)WorkerIPage.getPages()];
+        for(int i=0; i< (int)WorkerIPage.getPages(); i++){
             pagesList[i] = i+1;
         }
         modelAndView.addObject("pagesList", pagesList);
-        modelAndView.addObject("numberPages", studentIPage.getTotal());
-        List<Worker> workerList = studentIPage.getRecords();
-        System.out.println("studentList = "+ workerList);
-        modelAndView.addObject("studentList", workerList);
+        modelAndView.addObject("numberPages", WorkerIPage.getTotal());
+        List<Worker> workerList = WorkerIPage.getRecords();
+        System.out.println("WorkerList = "+ workerList);
+        modelAndView.addObject("WorkerList", workerList);
 
-        modelAndView.setViewName("student/student_list");
+        modelAndView.setViewName("Worker/Worker_list");
         return modelAndView;
     }
 
@@ -156,11 +156,11 @@ public class WorkerController extends AbstractController{
      * @param worker
      * @return
      */
-    @PostMapping(value = "/addEditStudent")
-    public String addEditStudent(Worker worker, HttpServletRequest request) {
+    @PostMapping(value = "/addEditWorker")
+    public String addEditWorker(Worker worker, HttpServletRequest request) {
         Worker worker1 = iWorkerService.findById(worker);
-        System.out.println("student = " + worker);
-        System.out.println("student1 = " + worker1);
+        System.out.println("Worker = " + worker);
+        System.out.println("Worker1 = " + worker1);
         // 新增用户信息
         if(worker1 == null){
             System.out.println("进入新增用户");
@@ -181,7 +181,7 @@ public class WorkerController extends AbstractController{
                 request.getSession().setAttribute("result", "editFalse");
             }
         }
-        return "redirect:/zjh/student/findStudentAll";
+        return "redirect:/zjh/worker/findWorkerAll";
     }
 
     /**
@@ -189,8 +189,8 @@ public class WorkerController extends AbstractController{
      * @param stuId
      * @return
      */
-    @GetMapping(value = "/deleteStudentById")
-    public String deleteStudentById(HttpServletRequest request, @Param("stuId") String stuId) {
+    @GetMapping(value = "/deleteWorkerById")
+    public String deleteWorkerById(HttpServletRequest request, @Param("stuId") String stuId) {
         Worker worker = new Worker();
         worker.setStuId(stuId);
         try {
@@ -199,7 +199,7 @@ public class WorkerController extends AbstractController{
         }catch (Exception e){
 
         }
-        return "redirect:/zjh/student/findStudentAll";
+        return "redirect:/zjh/worker/findWorkerAll";
     }
 
 }

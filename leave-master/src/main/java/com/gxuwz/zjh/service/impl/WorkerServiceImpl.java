@@ -20,36 +20,36 @@ public class WorkerServiceImpl implements IWorkerService {
 
     @Override
     public Worker findById(Worker worker) {
-        return workerMapper.findStudentById(worker);
+        return workerMapper.findWorkerById(worker);
     }
 
     @Override
-    public  List<Worker> findStudentByClassId(Worker worker) {
-        return workerMapper.findStudentByClassId(worker);
+    public  List<Worker> findWorkerByClassId(Worker worker) {
+        return workerMapper.findWorkerByClassId(worker);
     }
 
     @Override
     public List<Worker> findAll() {
-        return workerMapper.findStudentAll();
+        return workerMapper.findWorkerAll();
     }
 
     @Override
     public IPage<Worker> selectPage(Page<Worker> page, Wrapper<Worker> wrapper) {
-        return workerMapper.selectStudentPage(page, wrapper);
+        return workerMapper.selectWorkerPage(page, wrapper);
     }
 
     @Override
     public void addObject(Worker worker) {
-        workerMapper.addStudent(worker);
+        workerMapper.addWorker(worker);
     }
 
     @Override
     public void updateById(Worker worker) {
-        workerMapper.updateStudentById(worker);
+        workerMapper.updateWorkerById(worker);
     }
 
     @Override
     public void deleteById(Worker worker) {
-        workerMapper.deleteStudentById(worker);
+        workerMapper.deleteWorkerById(worker);
     }
 }

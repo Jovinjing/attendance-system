@@ -2,25 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxuwz.zjh.mapper.WorkerMapper">
 
-    <select id="findStudentById" resultType="Student" parameterType="Student">
-        select * from sys_student where stu_id = #{stuId}
+    <select id="findWorkerById" resultType="Worker" parameterType="Worker">
+        select * from sys_worker where stu_id = #{stuId}
     </select>
 
-    <select id="findStudentByClassId" resultType="Student" parameterType="Student">
-        select * from sys_student where class_id = #{classId}
+    <select id="findWorkerByClassId" resultType="Worker" parameterType="Worker">
+        select * from sys_worker where class_id = #{classId}
     </select>
 
-    <select id="findStudentAll" resultType="Student">
-        select * from sys_student
+    <select id="findWorkerAll" resultType="Worker">
+        select * from sys_worker
     </select>
 
-    <select id="selectStudentPage" resultType="Student">
-        select * from sys_student ${ew.customSqlSegment}
+    <select id="selectWorkerPage" resultType="Worker">
+        select * from sys_worker ${ew.customSqlSegment}
     </select>
 
 
-    <insert id="addStudent" parameterType="Student">
-        insert into sys_student
+    <insert id="addWorker" parameterType="Worker">
+        insert into sys_worker
         <trim prefix="(" suffix=")" suffixOverrides=",">
             stu_id,
             <if test="classId != null and classId != ''">
@@ -71,8 +71,8 @@
         </trim>
     </insert>
 
-    <update id="updateStudentById" parameterType="Student">
-        update sys_student
+    <update id="updateWorkerById" parameterType="Worker">
+        update sys_worker
         <set>
             <if test="classId != null and classId != ''">
                 class_id=#{classId},
@@ -99,8 +99,10 @@
         where stu_id=#{stuId}
     </update>
 
-    <delete id="deleteStudentById"  parameterType="Student">
-        delete from sys_student where stu_id=#{stuId}
+    <delete id="deleteWorkerById"  parameterType="Worker">
+        delete from sys_worker where stu_id=#{stuId}
     </delete>
 
 </mapper>
+
+

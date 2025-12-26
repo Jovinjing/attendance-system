@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Locale;
 
 @Configuration
-class MyLocaleResolver implements LocaleResolver {
+public class MyLocaleResolver implements LocaleResolver {
     //自定义区域解析方式
     @Override
     public Locale resolveLocale(HttpServletRequest httpServletRequest) {
@@ -35,10 +35,11 @@ class MyLocaleResolver implements LocaleResolver {
     public void setLocale(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Locale locale) {
 
     }
-    //将自定义的 MyLocaleResolver 类重新注册为一个类型localeResolver的Bean组件
-    @Bean
-    public LocaleResolver localeResolver(){
-        return new MyLocaleResolver();
-    }
+//    //将自定义的 MyLocaleResolver 类重新注册为一个类型localeResolver的Bean组件
+//    @Bean
+//    public LocaleResolver localeResolver(){
+//        return new MyLocaleResolver();
+//    }
 
+    // 内部配置类已移除，避免重复注册 myLocaleResolver bean
 }

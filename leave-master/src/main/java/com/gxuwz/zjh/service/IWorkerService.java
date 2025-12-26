@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface IWorkerService extends AbstractService<Worker>, SelectPageService<Worker> {
 
-    List<Worker> findStudentByClassId(Worker worker);
+    List<Worker> findWorkerByClassId(Worker worker);
 
 }

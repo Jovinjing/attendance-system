@@ -31,7 +31,7 @@
                 <li class="nav-header skin-3">
                     <div class="dropdown profile-element skin-0">
                         <span><img alt="image" class="img-circle" style="height:64px;width:64px;"
-                                   th:src="@{/img/tianda.jpg}"/></span>
+                                   th:src="@{/img/gyk.png}"/></span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 									<span class="clear">
 										<span class="block m-t-xs"><strong class="font-bold"
@@ -65,7 +65,7 @@
                             <a class="J_menuItem" th:href="@{/zjh/user/findUserById2}">员工财务信息管理</a>
                         </li>
                         <li th:if="${session.user.fullName eq '总经理'} or ${session.user.fullName eq '部门经理'}">
-                            <a class="J_menuItem" th:href="@{/zjh/worker/findStudentById}">员工信息管理</a>
+                            <a class="J_menuItem" th:href="@{/zjh/worker/findWorkerById}">员工信息管理</a>
                         </li>
                         <li th:if="${session.user.fullName eq '总经理'}">
                             <a class="J_menuItem" th:href="@{/zjh/instructor/findInstructorById}">部门经理管理</a>

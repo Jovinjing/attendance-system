@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,13 +16,13 @@ import org.apache.ibatis.type.Alias;
  * 工人表
  */
 @Data
-@Alias("Worker") //别名
+@Alias("Worker")
+@TableName("sys_worker")
 public class Worker extends Thing {
-
     @ApiModelProperty(value = "工号")
     private String stuId;
 
-    @ApiModelProperty(value = "班号")
+    @ApiModelProperty(value = "部门号")
     private String classId;
 
     @ApiModelProperty(value = "姓名")
@@ -58,7 +59,18 @@ public class Worker extends Thing {
 
     @Override
     public String toString() {
-        return "student";
+        return "Worker{" +
+                "stuId='" + stuId + '\'' +
+                ", classId='" + classId + '\'' +
+                ", stuName='" + stuName + '\'' +
+                ", sex=" + sex +
+                ", address='" + address + '\'' +
+                ", stuTel='" + stuTel + '\'' +
+                ", contact='" + contact + '\'' +
+                ", contactTel='" + contactTel + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
-
 }
+
