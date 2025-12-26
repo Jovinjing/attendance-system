@@ -98,7 +98,7 @@ public class WorkerController extends AbstractController{
         modelAndView.addObject("pages", (int)WorkerIPage.getPages());
         modelAndView.addObject("numberPages", WorkerIPage.getTotal());
         List<Worker> workerList = WorkerIPage.getRecords();
-        System.out.println("WorkerList = "+ workerList);
+        System.out.println("workerList = "+ workerList);
         modelAndView.addObject("workerList", workerList);
 
         modelAndView.setViewName("worker/worker_list");
@@ -144,7 +144,7 @@ public class WorkerController extends AbstractController{
         modelAndView.addObject("pagesList", pagesList);
         modelAndView.addObject("numberPages", WorkerIPage.getTotal());
         List<Worker> workerList = WorkerIPage.getRecords();
-        System.out.println("WorkerList = "+ workerList);
+        System.out.println("workerList = "+ workerList);
         modelAndView.addObject("WorkerList", workerList);
 
         modelAndView.setViewName("Worker/Worker_list");
